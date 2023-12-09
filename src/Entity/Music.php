@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Repository\MusicRepository;
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 #[ORM\Entity(repositoryClass: MusicRepository::class)]
 class Music
 {
@@ -14,28 +16,38 @@ class Music
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Length(min: 2, max: 255)]
     private ?string $title = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 50)]
+    #[Assert\Length(min: 2, max: 50)]
     private ?string $artist = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 50, nullable: true)]
+    #[Assert\Length(min: 2, max: 50)]
     private ?string $album = null;
 
     #[ORM\Column(nullable: true)]
     private ?int $release_year = null;
 
     #[ORM\Column(length: 100, nullable: true)]
+    #[Assert\Length(min: 2, max: 100)]
     private ?string $genre = null;
 
     #[ORM\Column]
     private ?int $duration = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Length(min: 2, max: 255)]
     private ?string $song_url = null;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $added_at = null;
+
+    public function __construct()
+    {
+        $this->added_at = new \DateTimeImmutable();
+    }
 
     public function getId(): ?int
     {
