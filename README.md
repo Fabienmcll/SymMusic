@@ -1,4 +1,4 @@
-# symMusic
+# SymMusic
 
 SymMusic est une plateforme  développée pour la création, le partage et la découverte de playlists musicales. Utilisant Symfony comme framework backend, Tailwind CSS pour un design épuré, et Docker Compose pour la gestion facilitée de MySQL et PHPMyAdmin, SymMusic offre une expérience harmonieuse et conviviale.
 
