@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SymMusic - Music{% endblock %}
+
+{% block body %}
+<div class="mx-52 text-center">
+    <h1 class="text-3xl font-bold mt-10">Les Musiques </h1>
+
+    <div class="count flex justify-center p-2">
+   <h4 class="text-lg font-bold"> Il y a {{ musics.getTotalItemCount }} musiques </h4>
+</div>
+
+   <table class="min-w-full bg-white border border-gray-300 mt-10">
+    <thead>
+        <tr class="bg-gray-200">
+            <th class="py-2 text-center">Numéros</th>
+            <th class="py-2 text-center">Nom</th>
+            <th class="py-2 text-center">Artiste(s)</th>
+            <th class="py-2 text-center">Album</th>
+            <th class="py-2 text-center">Date de sortie</th>
+            <th class="py-2 text-center">Genre</th>
+            <th class="py-2 text-center">Durée</th>
+            <th class="py-2 text-center">URL</th>
+            <th class="py-2 text-center">Date d'ajout</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for music in musics %}
+            <tr class="border-b border-gray-300">
+                <td class="py-2 text-center">{{ music.id }}</td>
+                <td class="py-2 text-center">{{ music.title }}</td>
+                <td class="py-2 text-center">{{ music.artist }}</td>
+                <td class="py-2 text-center">{{ music.album }}</td>
+                <td class="py-2 text-center">{{ music.getReleaseYear() }}</td>
+                <td class="py-2 text-center">{{ music.genre }}</td>
+                <td class="py-2 text-center">{{ music.duration }}</td>
+                <td class="py-2 text-center">{{ music.getSongUrl() }}</td>
+                <td class="py-2 text-center">{{ music.getAddedAt()|date('Y-m-d H:i:s') }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<div class="navigation flex justify-center mt-10">
+    {{ knp_pagination_render(musics) }}
+</div>
+
+</div>
+
+{% endblock %}
