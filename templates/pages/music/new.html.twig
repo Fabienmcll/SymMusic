@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SymMusic - Formulaire{% endblock %}
+
+{% block body %}
+    <div class="flex flex-col items-center justify-center">
+
+        {% for message in app.flashes('success') %}
+            <div class="flash-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        <div class="form-container">
+            <h1 class="text-3xl font-bold mt-10 mb-10">Ajouter une musique</h1>
+
+            {{ form_start(form) }}
+
+            <div class="form-group">
+                {{ form_label(form.title) }}
+                {{ form_widget(form.title) }}
+                <div class="form-error">
+                    {{ form_errors(form.title) }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                {{ form_label(form.artist) }}
+                {{ form_widget(form.artist) }}
+                <div class="form-error">
+                    {{ form_errors(form.artist) }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                {{ form_label(form.album) }}
+                {{ form_widget(form.album) }}
+                <div class="form-error">
+                    {{ form_errors(form.album) }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                {{ form_label(form.release_year) }}
+                {{ form_widget(form.release_year) }}
+                <div class="form-error">
+                    {{ form_errors(form.release_year) }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                {{ form_label(form.genre) }}
+                {{ form_widget(form.genre) }}
+                <div class="form-error">
+                    {{ form_errors(form.genre) }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                {{ form_label(form.duration) }}
+                {{ form_widget(form.duration) }}
+                <div class="form-error">
+                    {{ form_errors(form.duration) }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                {{ form_label(form.song_url) }}
+                {{ form_widget(form.song_url) }}
+                <div class="form-error">
+                    {{ form_errors(form.song_url) }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                {{ form_row(form._token) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_row(form.submit) }}
+            </div>
+
+            {{ form_end(form) }}
+        </div>
+
+    </div>
+{% endblock %}

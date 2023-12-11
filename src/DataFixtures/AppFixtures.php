@@ -26,7 +26,7 @@ class AppFixtures extends Fixture
                 ->setAlbum("Album " . $i)
                 ->setReleaseYear($this->faker->year())
                 ->setGenre("Genre " . $i)
-                ->setDuration(max(1, mt_rand(0, 5))) // Durée minimale de 1
+                ->setDuration(max(1, mt_rand(0, 5))) 
                 ->setSongUrl($this->faker->url());
 
             $manager->persist($music);
