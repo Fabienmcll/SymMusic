@@ -6,14 +6,20 @@
 <div class="mx-52 text-center">
     <h1 class="text-3xl font-bold mt-10">Les Musiques </h1>
 
-    <div class="count flex justify-center p-2">
-   <h4 class="text-lg font-bold"> Il y a {{ musics.getTotalItemCount }} musiques </h4>
+    <div class="count flex flex-col justify-center p-2">
+    <h4 class=" mt-4 text-lg font-bold"> Il y a {{ musics.getTotalItemCount }} musiques </h4>
+<a class="bg-gradient-to-r from-cyan-500 to-blue-500 p-2 w-1/5 rounded-2xl text-white font-bold mx-auto mt-4 transition-transform transform hover:scale-105" href="{{ path('music.new') }}">Ajouter une musique</a>
+  {% for message in app.flashes('success') %}
+            <div class="flash-success">
+                {{ message }}
+            </div>
+        {% endfor %}
 </div>
 
    <table class="min-w-full bg-white border border-gray-300 mt-10">
     <thead>
         <tr class="bg-gray-200">
-            <th class="py-2 text-center">Numéros</th>
+            <th class="py-2 text-center">ID</th>
             <th class="py-2 text-center">Nom</th>
             <th class="py-2 text-center">Artiste(s)</th>
             <th class="py-2 text-center">Album</th>
@@ -22,6 +28,8 @@
             <th class="py-2 text-center">Durée</th>
             <th class="py-2 text-center">URL</th>
             <th class="py-2 text-center">Date d'ajout</th>
+            <th class="py-2 text-center">Edition</th>
+            <th class="py-2 text-center">Suppresion</th>
         </tr>
     </thead>
     <tbody>
@@ -36,6 +44,11 @@
                 <td class="py-2 text-center">{{ music.duration }}</td>
                 <td class="py-2 text-center">{{ music.getSongUrl() }}</td>
                 <td class="py-2 text-center">{{ music.getAddedAt()|date('Y-m-d H:i:s') }}</td>
+               <td><a class="bg-orange-600 p-2" href="{{ path('music.edit', { id: music.id }) }}">Modifier</a></td>
+                <td><a class="bg-red-600 p-2" href="{{ path('music.delete', { id: music.id }) }}">Supprimer</a></td>
+
+
+
             </tr>
         {% endfor %}
     </tbody>

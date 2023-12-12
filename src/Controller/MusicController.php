@@ -43,11 +43,9 @@ class MusicController extends AbstractController
             $entityManager->flush();
 
             $this->addFlash(
-                'succes',
-                'votre musique a été ajouté avec succès !'
+                'success',
+                'Votre musique a été ajoutée avec succès !'
             );
-
-            return $this->redirectToRoute('app_music');
 
             return $this->redirectToRoute('app_music'); 
         }
@@ -56,7 +54,65 @@ class MusicController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+
+    #[Route('/music/edition/{id}', name: 'music.edit', methods: ['GET', 'POST'])]
+    public function edit(
+        Request $request,
+        EntityManagerInterface $manager
+    ): Response {
+        $musicId = $request->attributes->get('id'); // Récupérer l'id depuis la requête
+
+        $music = $manager->getRepository(Music::class)->find($musicId);
+
+        if (!$music) {
+            throw $this->createNotFoundException('La musique n\'existe pas.');
+        }
+
+        $form = $this->createForm(MusicType::class, $music);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager->flush();
+
+            $this->addFlash(
+                'success',
+                'Votre musique a été modifiée avec succès !'
+            );
+
+            return $this->redirectToRoute('app_music');
+        }
+
+        return $this->render('pages/music/edit.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
+    #[Route('/music/suppression/{id}', name: 'music.delete', methods: ['GET'])]
+public function delete(
+    EntityManagerInterface $manager,
+    $id // Récupérer l'ID directement depuis la route
+): Response {
+    $music = $manager->getRepository(Music::class)->find($id);
+
+    if (!$music) {
+        $this->addFlash(
+            'success',
+            'Votre musique n\'a pas été trouvée !'
+        );
+        return $this->redirectToRoute('music.index');
+    }
+
+    $manager->remove($music);
+    $manager->flush();
+
+    $this->addFlash(
+        'success',
+        'Votre musique a été supprimée avec succès !'
+    );
+
+    return $this->redirectToRoute('app_music');
 }
 
 
 
+}
