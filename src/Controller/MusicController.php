@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Music;
+use App\Entity\Playlist;  // Assurez-vous que Playlist est bien importé
 use App\Form\MusicType;
 use App\Repository\MusicRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -88,31 +89,28 @@ class MusicController extends AbstractController
     }
 
     #[Route('/music/suppression/{id}', name: 'music.delete', methods: ['GET'])]
-public function delete(
-    EntityManagerInterface $manager,
-    $id // Récupérer l'ID directement depuis la route
-): Response {
-    $music = $manager->getRepository(Music::class)->find($id);
+    public function delete(
+        EntityManagerInterface $manager,
+        $id // Récupérer l'ID directement depuis la route
+    ): Response {
+        $music = $manager->getRepository(Music::class)->find($id);
 
-    if (!$music) {
+        if (!$music) {
+            $this->addFlash(
+                'success',
+                'Votre musique n\'a pas été trouvée !'
+            );
+            return $this->redirectToRoute('music.index');
+        }
+
+        $manager->remove($music);
+        $manager->flush();
+
         $this->addFlash(
             'success',
-            'Votre musique n\'a pas été trouvée !'
+            'Votre musique a été supprimée avec succès !'
         );
-        return $this->redirectToRoute('music.index');
+
+        return $this->redirectToRoute('app_music');
     }
-
-    $manager->remove($music);
-    $manager->flush();
-
-    $this->addFlash(
-        'success',
-        'Votre musique a été supprimée avec succès !'
-    );
-
-    return $this->redirectToRoute('app_music');
-}
-
-
-
 }

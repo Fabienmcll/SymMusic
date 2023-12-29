@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Playlist index{% endblock %}
+
+{% block body %}
+    <div class="container mx-auto mt-8">
+        <h1 class="text-3xl font-semibold mb-4">Playlist index</h1>
+
+        <table class="min-w-full bg-white border border-gray-300 mt-4">
+            <thead>
+                <tr class="bg-gray-200">
+                    <th class="py-2 px-4 border-b">Id</th>
+                    <th class="py-2 px-4 border-b">Name</th>
+                    <th class="py-2 px-4 border-b">Description</th>
+                    <th class="py-2 px-4 border-b">Created_at</th>
+                    <th class="py-2 px-4 border-b">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for playlist in playlists %}
+                    <tr class="border-b border-gray-300">
+                        <td class="py-2 px-4 border-b">{{ playlist.id }}</td>
+                        <td class="py-2 px-4 border-b">{{ playlist.name }}</td>
+                        <td class="py-2 px-4 border-b">{{ playlist.description }}</td>
+                        <td class="py-2 px-4 border-b">{{ playlist.createdAt ? playlist.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                        <td class="py-2 px-4 border-b">
+                            <a href="{{ path('app_playlist_show', {'id': playlist.id}) }}" class="bg-green-500 text-black hover:bg-green-600 hover:underline py-1 px-3 rounded transition">Show</a>
+                            <a href="{{ path('app_playlist_edit', {'id': playlist.id}) }}" class="bg-yellow-500 text-black hover:bg-yellow-600 hover:underline py-1 px-3 rounded ml-2 transition">Edit</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td class="py-2 px-4 border-b" colspan="5">No records found</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <a href="{{ path('app_playlist_new') }}" class="mt-4 inline-block bg-blue-500 text-white py-2 px-4 rounded">Create new</a>
+    </div>
+{% endblock %}
