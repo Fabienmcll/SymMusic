@@ -21,7 +21,7 @@ class MusicType extends AbstractType
                     new Assert\NotBlank(),
                 ],
                 'attr' => [
-                    'class' => 'border p-2 mb-4 w-1/2 mx-auto rounded-md', // Largeur à 50% et centré
+                    'class' => 'border p-2 mb-4 w-1/2 mx-auto rounded-md', 
                 ],
             ])
             ->add('artist', TextType::class, [
@@ -30,7 +30,7 @@ class MusicType extends AbstractType
                     new Assert\NotBlank(),
                 ],
                 'attr' => [
-                    'class' => 'border p-2 mb-4 w-1/2 mx-auto rounded-md', // Largeur à 50% et centré
+                    'class' => 'border p-2 mb-4 w-1/2 mx-auto rounded-md', 
                 ],
             ])
             ->add('album', TextType::class, [
@@ -39,7 +39,7 @@ class MusicType extends AbstractType
                     new Assert\NotBlank(),
                 ],
                 'attr' => [
-                    'class' => 'border p-2 mb-4 w-1/2 mx-auto rounded-md', // Largeur à 50% et centré
+                    'class' => 'border p-2 mb-4 w-1/2 mx-auto rounded-md', 
                 ],
             ])
             ->add('release_year', TextType::class, [
@@ -48,7 +48,7 @@ class MusicType extends AbstractType
                     new Assert\NotBlank(),
                 ],
                 'attr' => [
-                    'class' => 'border p-2 mb-4 w-1/2 mx-auto rounded-md', // Largeur à 50% et centré
+                    'class' => 'border p-2 mb-4 w-1/2 mx-auto rounded-md', 
                 ],
             ])
             ->add('genre', TextType::class, [
@@ -57,7 +57,7 @@ class MusicType extends AbstractType
                     new Assert\NotBlank(),
                 ],
                 'attr' => [
-                    'class' => 'border p-2 mb-4 w-1/2 mx-auto rounded-md', // Largeur à 50% et centré
+                    'class' => 'border p-2 mb-4 w-1/2 mx-auto rounded-md', 
                 ],
             ])
             ->add('duration', TextType::class, [
@@ -66,7 +66,7 @@ class MusicType extends AbstractType
                     new Assert\NotBlank(),
                 ],
                 'attr' => [
-                    'class' => 'border p-2 mb-4 w-1/2 mx-auto rounded-md', // Largeur à 50% et centré
+                    'class' => 'border p-2 mb-4 w-1/2 mx-auto rounded-md',
                 ],
             ])
             ->add('song_url', TextType::class, [
@@ -75,12 +75,12 @@ class MusicType extends AbstractType
                     new Assert\NotBlank(),
                 ],
                 'attr' => [
-                    'class' => 'border p-2 mb-4 w-1/2 mx-auto rounded-md', // Largeur à 50% et centré
+                    'class' => 'border p-2 mb-4 w-1/2 mx-auto rounded-md', 
                 ],
             ])
             ->add('submit', SubmitType::class, [
                 'attr' => [
-                    'class' => 'bg-blue-500 text-white p-2 rounded-md', // Ajoutez les classes Tailwind ici
+                    'class' => 'bg-blue-500 text-white p-2 rounded-md',
                 ],
             ]);
     }

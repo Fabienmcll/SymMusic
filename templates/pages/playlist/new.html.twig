@@ -3,9 +3,15 @@
 {% block title %}Nouvelle Playlist{% endblock %}
 
 {% block body %}
-    <h1>Créer une nouvelle playlist</h1>
+<div class="flex tems-center flex-col">
+    <h1 class="text-3xl font-bold text-center mt-10">Créer une nouvelle playlist</h1>
+
+<div class="flex flex-col items-center mt-8">
 
     {{ include('pages/playlist/_form.html.twig') }}
 
-    <a href="{{ path('app_playlist') }}">Retour à la liste</a>
+    <a href="{{ path('app_playlist') }}" class="bg-green-500 text-white hover:bg-green-600 hover:underline py-1 px-3 rounded transition mt-2">Retour à la liste</a>
+
+</div>
+
 {% endblock %}

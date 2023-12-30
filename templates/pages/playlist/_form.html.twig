@@ -1,4 +1,10 @@
+<div class="text-center">
 {{ form_start(form) }}
     {{ form_widget(form) }}
-    <button class="bg-yellow-500 text-white hover:bg-yellow-600 hover:underline py-1 px-3 rounded ml-2 transition mb-2">{{ button_label|default('Save') }}</button>
+</div>
+
+    <div class="flex flex-col items-center">
+    <button class="bg-yellow-500 text-white hover:bg-yellow-600 hover:underline py-1 px-3 rounded ml-2 transition mt-2 mb-2">{{ button_label|default('Sauvegarder') }}</button>
 {{ form_end(form) }}
+
+</div>
