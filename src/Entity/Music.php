@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\MusicRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
@@ -46,9 +48,13 @@ class Music
     #[ORM\Column]
     private ?\DateTimeImmutable $added_at = null;
 
+    #[ORM\ManyToMany(targetEntity: Playlist::class, inversedBy: 'music')]
+    private Collection $playlists;
+
     public function __construct()
     {
         $this->added_at = new \DateTimeImmutable();
+        $this->playlists = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -148,6 +154,30 @@ class Music
     public function setAddedAt(\DateTimeImmutable $added_at): static
     {
         $this->added_at = $added_at;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Playlist>
+     */
+    public function getPlaylists(): Collection
+    {
+        return $this->playlists;
+    }
+
+    public function addPlaylist(Playlist $playlist): static
+    {
+        if (!$this->playlists->contains($playlist)) {
+            $this->playlists->add($playlist);
+        }
+
+        return $this;
+    }
+
+    public function removePlaylist(Playlist $playlist): static
+    {
+        $this->playlists->removeElement($playlist);
 
         return $this;
     }

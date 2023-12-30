@@ -34,3 +34,4 @@ class PlaylistType extends AbstractType
         ]);
     }
 }
+
