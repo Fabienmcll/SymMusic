@@ -1,18 +1,24 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Playlist index{% endblock %}
+{% block title %}SymMusic - Playlists{% endblock %}
 
 {% block body %}
     <div class="container mx-auto mt-8">
-        <h1 class="text-3xl font-semibold mb-4">Playlist index</h1>
+        <h1 class="text-3xl text-center font-bold mt-10">Les Playlists</h1>
+
+          <div class="count flex flex-col justify-center p-2">
+            <h4 class="mt-4 text-lg font-bold text-center"> Il y a {{ playlists.getTotalItemCount }} playlists </h4>
+            <a class="bg-gradient-to-r from-cyan-500 to-blue-500 p-2 w-1/5 rounded-2xl text-white font-bold mx-auto mt-4 transition-transform transform hover:scale-105 text-center" href="{{ path('app_playlist_new') }}">Ajouter une playlist</a>
+
+        </div>
 
         <table class="min-w-full bg-white border border-gray-300 mt-4">
             <thead>
                 <tr class="bg-gray-200">
                     <th class="py-2 px-4 border-b">Id</th>
-                    <th class="py-2 px-4 border-b">Name</th>
+                    <th class="py-2 px-4 border-b">Nom</th>
                     <th class="py-2 px-4 border-b">Description</th>
-                    <th class="py-2 px-4 border-b">Created_at</th>
+                    <th class="py-2 px-4 border-b">Date de création</th>
                     <th class="py-2 px-4 border-b">Actions</th>
                 </tr>
             </thead>
@@ -24,18 +30,16 @@
                         <td class="py-2 px-4 border-b">{{ playlist.description }}</td>
                         <td class="py-2 px-4 border-b">{{ playlist.createdAt ? playlist.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                         <td class="py-2 px-4 border-b">
-                            <a href="{{ path('app_playlist_show', {'id': playlist.id}) }}" class="bg-green-500 text-black hover:bg-green-600 hover:underline py-1 px-3 rounded transition">Show</a>
-                            <a href="{{ path('app_playlist_edit', {'id': playlist.id}) }}" class="bg-yellow-500 text-black hover:bg-yellow-600 hover:underline py-1 px-3 rounded ml-2 transition">Edit</a>
+                            <a href="{{ path('app_playlist_show', {'id': playlist.id}) }}" class="bg-green-500 text-white hover:bg-green-600 hover:underline py-1 px-3 rounded transition">Voir</a>
+                            <a href="{{ path('app_playlist_edit', {'id': playlist.id}) }}" class="bg-yellow-500 text-white hover:bg-yellow-600 hover:underline py-1 px-3 rounded ml-2 transition">Modifier</a>
                         </td>
                     </tr>
                 {% else %}
                     <tr>
-                        <td class="py-2 px-4 border-b" colspan="5">No records found</td>
+                        <td class="py-2 px-4 border-b" colspan="5">Aucune playlist</td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
-
-        <a href="{{ path('app_playlist_new') }}" class="mt-4 inline-block bg-blue-500 text-white py-2 px-4 rounded">Create new</a>
     </div>
 {% endblock %}

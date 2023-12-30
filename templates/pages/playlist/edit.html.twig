@@ -1,13 +1,22 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Playlist{% endblock %}
+{% block title %}Modifier la Playlist{% endblock %}
 
 {% block body %}
-    <h1>Edit Playlist</h1>
+
+<div class="text-center mx-auto ">
+
+    <h1 class="text-3xl font-bold text-center mt-10">Modifier la Playlist</h1>
+
+    <div class="mt-8">
 
     {{ include('pages/playlist/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('app_playlist') }}">back to list</a>
+    <a href="{{ path('app_playlist') }}" class="bg-green-500 text-white hover:bg-green-600 hover:underline py-1 px-3 rounded transition mt2 ">Retour à la liste</a>
 
     {{ include('pages/playlist/_delete_form.html.twig') }}
+
+    </div>
+
+    </div>
 {% endblock %}

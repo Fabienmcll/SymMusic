@@ -3,8 +3,10 @@
 {% block title %}Playlist{% endblock %}
 
 {% block body %}
-    <h1>Playlist</h1>
+    <h1 class="text-3xl font-bold text-center mt-10">Centre de controle</h1>
 
+<div class="text-center mx-auto">
+<div class="flex justify-center mt-8 mb-10">
     <table class="table">
         <tbody>
             <tr>
@@ -26,9 +28,20 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_playlist') }}">back to list</a>
+    </div>
 
-    <a href="{{ path('app_playlist_edit', {'id': playlist.id}) }}">edit</a>
+    <div class="flex  items-center flex-col">
 
-    {{ include('pages/playlist/_delete_form.html.twig') }}
+    <a href="{{ path('app_playlist') }}" class="bg-green-500 text-white hover:bg-green-600 hover:underline py-1 px-3 rounded transition ">Retour à la liste</a>
+
+    <a href="{{ path('app_playlist_edit', {'id': playlist.id}) }}" class="bg-yellow-500 text-white hover:bg-yellow-600 hover:underline py-1 px-3 rounded ml-2 transition mt-2">Modifier</a>
+
+    <a> {{ include('pages/playlist/_delete_form.html.twig') }} </a>
+
+   
+
+    </div>
+
+    </div>
+
 {% endblock %}

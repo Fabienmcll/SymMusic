@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Playlist{% endblock %}
+{% block title %}Nouvelle Playlist{% endblock %}
 
 {% block body %}
-    <h1>Create new Playlist</h1>
+    <h1>Créer une nouvelle playlist</h1>
 
     {{ include('pages/playlist/_form.html.twig') }}
 
-    <a href="{{ path('app_playlist') }}">back to list</a>
+    <a href="{{ path('app_playlist') }}">Retour à la liste</a>
 {% endblock %}

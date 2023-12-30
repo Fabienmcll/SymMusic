@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Playlist;
 use App\Form\PlaylistType;
 use App\Repository\PlaylistRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,10 +16,16 @@ use Symfony\Component\Routing\Annotation\Route;
 class PlaylistController extends AbstractController
 {
     #[Route('/', name: 'app_playlist', methods: ['GET'])]
-    public function index(PlaylistRepository $playlistRepository): Response
+    public function index(PlaylistRepository $playlistRepository, PaginatorInterface $paginator, Request $request): Response
     {
+        $playlists = $paginator->paginate(
+            $playlistRepository->findAll(),
+            $request->query->getInt('page', 1),
+            10
+        );
+
         return $this->render('pages/playlist/index.html.twig', [
-            'playlists' => $playlistRepository->findAll(),
+            'playlists' => $playlists,
         ]);
     }
 
