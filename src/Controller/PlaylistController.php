@@ -12,8 +12,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-
-
 #[Route('/playlist')]
 class PlaylistController extends AbstractController
 {
@@ -37,16 +35,16 @@ class PlaylistController extends AbstractController
         $playlist = new Playlist();
         $form = $this->createForm(PlaylistType::class, $playlist);
         $form->handleRequest($request);
-    
+
         if ($form->isSubmitted() && $form->isValid()) {
             $playlist->setCreatedAt(new \DateTimeImmutable()); // Définir la date de création ici
-    
+
             $entityManager->persist($playlist);
             $entityManager->flush();
-    
+
             return $this->redirectToRoute('app_playlist', [], Response::HTTP_SEE_OTHER);
         }
-    
+
         return $this->renderForm('pages/playlist/new.html.twig', [
             'playlist' => $playlist,
             'form' => $form,
@@ -82,7 +80,7 @@ class PlaylistController extends AbstractController
     #[Route('/{id}', name: 'app_playlist_delete', methods: ['POST'])]
     public function delete(Request $request, Playlist $playlist, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$playlist->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $playlist->getId(), $request->request->get('_token'))) {
             $entityManager->remove($playlist);
             $entityManager->flush();
         }

@@ -6,8 +6,6 @@ use App\Entity\Playlist;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use App\Repository\MusicRepository;
-
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -34,7 +32,7 @@ class PlaylistType extends AbstractType
                 'class' => 'App\Entity\Music',
                 'query_builder' => function (MusicRepository $r) {
                     return $r->createQueryBuilder('m')
-                        ->orderBy('m.title', 'ASC'); 
+                        ->orderBy('m.title', 'ASC');
                 },
                 'choice_label' => 'title',
                 'multiple' => true,
@@ -42,9 +40,8 @@ class PlaylistType extends AbstractType
                 'attr' => [
                     'class' => 'border p-2 mb-4 w-1/2 mx-auto rounded-md',
                 ],
+                'data' => $options['data']->getMusic()->toArray(), // Préremplir avec les musiques actuelles
             ]);
-            
-           
     }
 
     public function configureOptions(OptionsResolver $resolver): void
