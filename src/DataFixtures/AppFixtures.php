@@ -3,14 +3,34 @@
 namespace App\DataFixtures;
 
 use App\Entity\Music;
+use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Faker\Factory;
 
 class AppFixtures extends Fixture
 {
+    private $faker;
+
+    public function __construct()
+    {
+        $this->faker = Factory::create();
+    }
+
     public function load(ObjectManager $manager): void
     {
         $this->loadMusic($manager);
+
+        // USERS
+        for ($i = 0; $i < 10; $i++) {
+            $user = new User();
+            $user->setFullName($this->faker->name())
+                ->setPseudo(mt_rand(0, 1) === 1 ? $this->faker->firstName() : null)
+                ->setEmail($this->faker->email())
+                ->setPassword('password');
+
+            $manager->persist($user);
+        }
 
         $manager->flush();
     }
@@ -28,10 +48,6 @@ class AppFixtures extends Fixture
         $this->createMusic($manager, 'Comme d\'habitude', 'Claude François', 'Comme d\'habitude', 'Chanson française, Pop', 1968);
         $this->createMusic($manager, 'La Bohème', 'Charles Aznavour', 'La Bohème', 'Chanson française', 1965);
         $this->createMusic($manager, 'Jour 1', 'Louane', 'Chambre 12', 'Pop, Chanson française', 2015);
-        
-
-        // Créer des chansons génériques avec des détails aléatoires
-       
     }
 
     private function createMusic(
