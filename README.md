@@ -1,60 +1,18 @@
 # SymMusic
 
-SymMusic est une plateforme  développée pour la création, le partage et la découverte de playlists musicales. Utilisant Symfony comme framework backend, Tailwind CSS pour un design épuré, et Docker Compose pour la gestion facilitée de MySQL et PHPMyAdmin, SymMusic offre une expérience harmonieuse et conviviale.
-
-## Prérequis
-
-Assurez-vous que les éléments suivants sont installés sur votre machine avant de commencer :
-
-- [Docker](https://www.docker.com/)
-- [Docker Compose](https://docs.docker.com/compose/)
-- [Composer](https://getcomposer.org/)
-
-## Installation
-
-1. Clonez le dépôt sur votre machine locale.
-
-    ```bash
-    git clone https://github.com/votre-utilisateur/symMusic.git
-    ```
-
-2. Accédez au répertoire du projet.
-
-    ```bash
-    cd symMusic
-    ```
-
-3. Installez les dépendances Symfony.
-
-    ```bash
-    composer install
-    ```
-
-4. Copiez le fichier `.env` et configurez les variables d'environnement pour la base de données.
-
-    ```bash
-    cp .env.example .env
-    ```
-
-5. Lancez les conteneurs Docker.
-
-    ```bash
-    docker-compose up -d
-    ```
-
-6. Appliquez les migrations Symfony.
-
-    ```bash
-    php bin/console doctrine:migrations:migrate
-    ```
-
-7. Visitez votre application dans le navigateur à l'adresse [http://localhost](http://localhost).
+## Introduction
+SymMusic est un projet Symfony 6 avec Docker Compose, créé dans le cadre de l'épreuve de certification professionnelle du BTS SIO, option SLAM.
 
 ## Fonctionnalités
+- Gestion d'une entité "Music" avec des opérations CRUD.
+- Utilisation de fixtures pour peupler la table "Music".
+- Gestion d'une entité "Playlist" en relation ManyToMany avec "Music".
+- Opérations CRUD pour la manipulation des playlists.
+- Possibilité de créer des playlists avec les musiques de la table "Music".
+- Utilisation de Tailwind CSS pour le stylage.
 
-- Création de playlists personnalisées.
-- Ajout de chansons à vos playlists.
-- Partage de playlists avec la communauté.
-- Découverte de nouvelles musiques.
-- Interface conviviale basée sur Tailwind CSS.
+## Utilisation
+Ce projet a été créé pour démontrer les compétences acquises dans le cadre du BTS SIO, option SLAM. Les fonctionnalités principales sont la gestion de musiques et de playlists à l'aide de Symfony 6. Le stylage est réalisé avec Tailwind CSS.
+
+N'hésitez pas à explorer le code source pour comprendre la mise en œuvre de ces fonctionnalités.
 
