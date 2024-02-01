@@ -27,6 +27,9 @@ class Playlist
     #[ORM\ManyToMany(targetEntity: Music::class, mappedBy: 'playlists')]
     private Collection $music;
 
+    #[ORM\ManyToOne(inversedBy: 'playlists')]
+    private ?Users $user = null;
+
     public function __construct()
     {
         $this->music = new ArrayCollection();
@@ -96,6 +99,18 @@ class Playlist
         if ($this->music->removeElement($music)) {
             $music->removePlaylist($this);
         }
+
+        return $this;
+    }
+
+    public function getUser(): ?Users
+    {
+        return $this->user;
+    }
+
+    public function setUser(?Users $user): static
+    {
+        $this->user = $user;
 
         return $this;
     }

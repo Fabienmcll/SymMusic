@@ -1,0 +1,7 @@
+
+
+{% if artistWithMostTitles %}
+    <p>L'artiste avec le plus de titres est {{ artistWithMostTitles.artist }} avec {{ artistWithMostTitles.titleCount }} titres.</p>
+{% else %}
+    <p>Aucun artiste trouvé.</p>
+{% endif %}

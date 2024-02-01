@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Music;
+use App\Entity\Users;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -11,6 +12,7 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         $this->loadMusic($manager);
+        $this->loadUsers($manager); 
 
         $manager->flush();
     }
@@ -59,5 +61,30 @@ class AppFixtures extends Fixture
             ->setSongUrl('https://youtube.com');
 
         $manager->persist($music);
+    }
+
+    private function loadUsers(ObjectManager $manager): void
+    {
+        $this->createUser($manager, 'Dupont');
+        $this->createUser($manager, 'Martin');
+        $this->createUser($manager, 'Lefevre');
+        $this->createUser($manager, 'Doe');
+        $this->createUser($manager, 'Smith');
+        $this->createUser($manager, 'Johnson');
+        $this->createUser($manager, 'Taylor');
+        $this->createUser($manager, 'Brown');
+        $this->createUser($manager, 'Anderson');
+        $this->createUser($manager, 'Thomas');
+
+    }
+
+    private function createUser(
+        ObjectManager $manager,
+        string $name,
+    ): void {
+        $user = new Users();
+        $user->setName($name);
+    
+        $manager->persist($user);
     }
 }

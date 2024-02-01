@@ -22,6 +22,11 @@
                         <td>{{ playlist.description }}</td>
                     </tr>
                     <tr>
+                    <th>Appartient à :</th>
+                    <td>{{ playlist.user.getName() }}</td>
+                    </tr>
+
+                    <tr>
                         <th>Created_at</th>
                         <td>{{ playlist.createdAt ? playlist.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                     </tr>

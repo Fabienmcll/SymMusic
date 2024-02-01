@@ -1,11 +1,15 @@
 <?php
+// src/Form/PlaylistType.php
 
 namespace App\Form;
 
 use App\Entity\Playlist;
+use App\Entity\Users;
+use App\Repository\MusicRepository;
+use App\Repository\UsersRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use App\Repository\MusicRepository;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -23,6 +27,16 @@ class PlaylistType extends AbstractType
             ])
             ->add('description', TextType::class, [
                 'label' => 'Description',
+                'attr' => [
+                    'class' => 'border p-2 mb-4 w-1/2 mx-auto rounded-md',
+                ],
+            ])
+            ->add('user', ChoiceType::class, [
+                'label' => 'Utilisateur',
+                'choices' => $options['users'],
+                'choice_label' => function (Users $user) {
+                    return $user->getName(); 
+                },
                 'attr' => [
                     'class' => 'border p-2 mb-4 w-1/2 mx-auto rounded-md',
                 ],
@@ -45,13 +59,13 @@ class PlaylistType extends AbstractType
                 ],
                 'data' => $options['data']->getMusic()->toArray(), 
             ]);
-            
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Playlist::class,
+            'users' => [], // Option pour stocker les utilisateurs
         ]);
     }
 }

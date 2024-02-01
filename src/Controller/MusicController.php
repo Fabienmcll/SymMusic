@@ -113,4 +113,15 @@ class MusicController extends AbstractController
 
         return $this->redirectToRoute('app_music');
     }
+
+    #[Route('/sql', name: 'sql', methods: ['GET'])]
+    public function artistWithMostTitlesAction()
+{
+    $repository = $this->getDoctrine()->getRepository(Music::class);
+    $artistWithMostTitles = $repository->findArtistWithMostTitles();
+
+    return $this->render('pages/index.html.twig', [
+        'artistWithMostTitles' => $artistWithMostTitles,
+    ]);
+}
 }

@@ -21,6 +21,20 @@ class MusicRepository extends ServiceEntityRepository
         parent::__construct($registry, Music::class);
     }
 
+    public function findArtistWithMostTitles()
+{
+    $entityManager = $this->getEntityManager();
+    $query = $entityManager->createQuery(
+        'SELECT m.artist, COUNT(m.id) as titleCount
+        FROM App\Entity\Music m
+        GROUP BY m.artist
+        ORDER BY titleCount DESC
+        LIMIT 1'
+    );
+
+    return $query->getOneOrNullResult();
+}
+
 //    /**
 //     * @return Music[] Returns an array of Music objects
 //     */
